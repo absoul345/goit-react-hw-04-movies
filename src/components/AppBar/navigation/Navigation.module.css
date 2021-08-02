@@ -1,0 +1,23 @@
+.containerNav {
+  border-bottom: 2px solid black;
+}
+
+.list {
+  display: flex;
+  padding: 15px 0 30px 30px;
+}
+
+.item:not(:last-child) {
+  margin-right: 15px;
+}
+
+.Nav {
+  color: black;
+  font-size: 25px;
+  font-weight: 700;
+  display: flex;
+}
+
+.NavActive {
+  color: red;
+}

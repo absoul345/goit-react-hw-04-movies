@@ -1,0 +1,17 @@
+.CastList {
+  margin-top: 20px;
+  padding-left: 30px;
+}
+
+.CastItem:not(:last-child) {
+  margin-bottom: 20px;
+}
+
+.CastImg {
+  width: 200px;
+  height: 300px;
+}
+
+.CastName {
+  font-size: 30px;
+}

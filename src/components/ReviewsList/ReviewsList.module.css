@@ -1,0 +1,25 @@
+.ReviewsName {
+  font-size: 25px;
+}
+
+.ReviewsItem .ReviewsItem:not(:last-child) {
+  margin-bottom: 10px;
+}
+
+.ReviewsContent {
+  font-size: 15px;
+  font-weight: 500;
+}
+
+.ReviewsEmpty {
+  margin-top: 10px;
+  padding-left: 30px;
+  font-size: 20px;
+}
+
+.ReviewsList {
+  margin-top: 10px;
+  padding-left: 30px;
+  padding-right: 10px;
+  padding-bottom: 10px;
+}

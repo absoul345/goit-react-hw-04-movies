@@ -1,0 +1,49 @@
+.PosterMovie {
+  width: 350px;
+  height: 400px;
+}
+
+.SectionDitails {
+  padding-left: 30px;
+  padding-top: 30px;
+  padding-bottom: 30px;
+  display: flex;
+  border-bottom: 2px solid black;
+}
+
+.DescriptionMovie {
+  margin-left: 30px;
+}
+
+.DescrItem:not(:last-child) {
+  margin-bottom: 30px;
+}
+
+.Genres {
+  display: flex;
+}
+
+.GenresItem:not(:last-child) {
+  margin-right: 10px;
+}
+
+.SectionAdditionl {
+  padding-top: 20px;
+}
+
+.NavListAdditional {
+  border-bottom: 2px solid black;
+  padding-left: 30px;
+}
+
+.Btn {
+  cursor: pointer;
+  color: white;
+  background-color: red;
+  border: 1px solid red;
+  margin-top: 20px;
+  margin-left: 30px;
+  width: 100px;
+  height: 30px;
+  font-size: 10px;
+}
