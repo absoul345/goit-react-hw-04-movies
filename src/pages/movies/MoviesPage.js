@@ -1,9 +1,9 @@
-import axios from 'axios';
 import React, { Component } from 'react';
 import MovieSearchForm from '../../components/movieSearchForm/MovieSearchForm';
 import MoviesList from '../../components/MoviesList/MoviesList';
 import queryString from 'query-string';
 import styles from '../../components/MoviesList/MovieList.module.css';
+import { fetchSearch } from '../../services/apiService';
 
 export class Movies extends Component {
   state = { movies: [] };
@@ -17,15 +17,12 @@ export class Movies extends Component {
   }
 
   onChangeQuary = async query => {
-    const BASE_URL = 'https://api.themoviedb.org';
-    const KEY = 'e4343e9435d3c889d6a064dcae0361e0';
-    await axios
-      .get(
-        `${BASE_URL}/3/search/movie?api_key=${KEY}&query=${query}&language=en-US&page=1&include_adult=false`,
-      )
-      .then(response => {
-        this.setState({ movies: response.data.results });
-      });
+    try {
+      const response = await fetchSearch(query);
+      this.setState({ movies: [...response] });
+    } catch (error) {
+      console.log(error);
+    }
   };
   render() {
     const { movies } = this.state;
@@ -33,7 +30,7 @@ export class Movies extends Component {
     return (
       <div className={styles.MovieContainer}>
         <MovieSearchForm onSubmit={this.onChangeQuary} />
-        <MoviesList movies={movies} location={location}></MoviesList>
+        <MoviesList movies={movies} location={location} />
       </div>
     );
   }

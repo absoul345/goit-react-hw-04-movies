@@ -1,11 +1,11 @@
 /* eslint-disable jsx-a11y/alt-text */
-import axios from 'axios';
 import React, { Component } from 'react';
 import styles from './MoviesDetailsPage.module.css';
-import { NavLink, Route } from 'react-router-dom';
+import { NavLink, Route, withRouter } from 'react-router-dom';
 import Cast from '../../components/Cast/Cast';
 import Reviews from '../../components/Reviews/Reviews';
 import routes from '../../routes';
+import { fetchMovieDetails } from '../../services/apiService';
 
 export class MovieDetails extends Component {
   state = {
@@ -18,13 +18,12 @@ export class MovieDetails extends Component {
   };
 
   async componentDidMount() {
-    const { movieId } = this.props.match.params;
-    const BASE_URL = 'https://api.themoviedb.org';
-    const KEY = 'e4343e9435d3c889d6a064dcae0361e0';
-    const response = await axios.get(
-      `${BASE_URL}/3/movie/${movieId}?api_key=${KEY}`,
-    );
-    this.setState({ ...response.data });
+    try {
+      const response = await fetchMovieDetails(this.props.match.params.movieId);
+      this.setState(response);
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   handleGoBack = () => {
@@ -82,10 +81,24 @@ export class MovieDetails extends Component {
             <h2>Additional Information</h2>
             <ul>
               <li>
-                <NavLink to={`${match.url}/cast`}>Cast</NavLink>
+                <NavLink
+                  to={{
+                    pathname: `${match.url}/cast`,
+                    state: { from: this.props.location.state.from },
+                  }}
+                >
+                  Cast
+                </NavLink>
               </li>
               <li>
-                <NavLink to={`${match.url}/reviews`}>Reviews</NavLink>
+                <NavLink
+                  to={{
+                    pathname: `${match.url}/reviews`,
+                    state: { from: this.props.location.state.from },
+                  }}
+                >
+                  Reviews
+                </NavLink>
               </li>
             </ul>
           </div>
@@ -102,4 +115,4 @@ export class MovieDetails extends Component {
   }
 }
 
-export default MovieDetails;
+export default withRouter(MovieDetails);

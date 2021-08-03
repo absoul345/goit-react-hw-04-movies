@@ -1,17 +1,17 @@
-import axios from 'axios';
 import React, { Component } from 'react';
 import ReviewsList from '../ReviewsList/ReviewsList';
+import { fetchReviews } from '../../services/apiService';
 
 export class Reviews extends Component {
   state = { reviews: [], moviesId: null };
 
   async componentDidMount() {
-    const { movieId } = this.props.match.params;
-    const BASE_URL = 'https://api.themoviedb.org';
-    const KEY = 'e4343e9435d3c889d6a064dcae0361e0';
-    const newReviews = await axios.get(`
-${BASE_URL}/3/movie/${movieId}/reviews?api_key=${KEY}`);
-    this.setState({ reviews: newReviews.data.results });
+    try {
+      const response = await fetchReviews(this.props.match.params.movieId);
+      this.setState({ reviews: [...response] });
+    } catch (error) {
+      console.log(error);
+    }
   }
   render() {
     const { reviews } = this.state;
